@@ -8,7 +8,6 @@ const pool = require('../db/dbservicepool.js');
 // add query functions
 usertype.getAllUseTypes =  function getAllUserTypes(req, res, next) {
     var _data = req.body; //getUserData(req);
-
     db.callProcedure("select " + globals.schema("funget_usertypemaster") + "($1,$2::json);", ['users', _data], function(data) {
         rs.resp(res, 200, data.rows);
     }, function(err) {
@@ -33,8 +32,8 @@ usertype.getAllUseTypes =  function getAllUserTypes(req, res, next) {
   }
   
   usertype.createUserType = function createUserType(req, res, next) {
-    console.log(req.query);
-    db.callProcedure("select " + globals.schema("funsave_usertype") + "($1::json);", [_data], function(data) {
+    var _data = req.body;
+    db.callFunction("select " + globals.schema("funsave_usertype") + "($1::json);", [_data], function(data) {
       rs.resp(res, 200, data.rows);
   }, function(err) {
       rs.resp(res, 401, "error : " + err);
@@ -53,7 +52,6 @@ usertype.getAllUseTypes =  function getAllUserTypes(req, res, next) {
   }
   
   usertype.updateUserType = function updateUserType(req, res, next) {
-    console.log(req.query);
     db.none('update usertype set name=$1, surname=$2, dob=$3 where id=$4',
       [req.query.name, req.query.surname, req.query.dob, parseInt(req.params.id)])
       .then(function () {
@@ -69,7 +67,6 @@ usertype.getAllUseTypes =  function getAllUserTypes(req, res, next) {
   }
   
   usertype.deleteUserType = function deleteUserType(req, res, next) {
-    var UserId = parseInt(req.params.id);
     db.result('delete from usertype where id = $1', UserId)
       .then(function (result) {
         /* jshint ignore:start */

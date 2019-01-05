@@ -33,7 +33,6 @@ donation.getAlldonations =  function getAlldonations(req, res, next) {
   }
   
   donation.createdonation = function createdonation(req, res, next) {
-    console.log(req.query);
     db.none('insert into donation(name, surname, dob) values (${name}, ${surname}, ${dob})', req.query)
       .then(function () {
         res.status(200)
@@ -48,7 +47,6 @@ donation.getAlldonations =  function getAlldonations(req, res, next) {
   }
   
   donation.updatedonation = function updatedonation(req, res, next) {
-    console.log(req.query);
     db.none('update donation set name=$1, surname=$2, dob=$3 where id=$4',
       [req.query.name, req.query.surname, req.query.dob, parseInt(req.params.id)])
       .then(function () {

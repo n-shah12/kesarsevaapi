@@ -20,20 +20,21 @@ db.callProcedure = function callProcedure(funName, data, callback, errcallback, 
                 commit(client, done);
                 return
             }
+           
             client.query(funName, data, function(err, result) {
                 if (err) {
+                    
                     errcallback(err);
                     commit(client, done);
                     return
                 }
-
-                var results = { "rows": [] };
+              
+                var results = { "rows": result.rows };
                 var querycount = 0;
                 refcount = refcount === undefined ? 1 : refcount;
 
                 for (var index = 0; index < refcount; index++) {
                     var element = data[index];
-
                     client.query('FETCH all from ' + element + ' ;', function(err, result) {
                         if (err) {
                             errcallback(err);

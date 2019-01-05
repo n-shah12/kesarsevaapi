@@ -33,7 +33,6 @@ order.getAllorders =  function getAllorders(req, res, next) {
   }
   
   order.createorder = function createorder(req, res, next) {
-    console.log(req.query);
     db.none('insert into order(name, surname, dob) values (${name}, ${surname}, ${dob})', req.query)
       .then(function () {
         res.status(200)
@@ -48,7 +47,6 @@ order.getAllorders =  function getAllorders(req, res, next) {
   }
   
   order.updateorder = function updateorder(req, res, next) {
-    console.log(req.query);
     db.none('update order set name=$1, surname=$2, dob=$3 where id=$4',
       [req.query.name, req.query.surname, req.query.dob, parseInt(req.params.id)])
       .then(function () {

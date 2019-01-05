@@ -33,7 +33,6 @@ location.getAlllocations =  function getAlllocations(req, res, next) {
   }
   
   location.createlocation = function createlocation(req, res, next) {
-    console.log(req.query);
     db.none('insert into location(name, surname, dob) values (${name}, ${surname}, ${dob})', req.query)
       .then(function () {
         res.status(200)
@@ -48,7 +47,6 @@ location.getAlllocations =  function getAlllocations(req, res, next) {
   }
   
   location.updatelocation = function updatelocation(req, res, next) {
-    console.log(req.query);
     db.none('update location set name=$1, surname=$2, dob=$3 where id=$4',
       [req.query.name, req.query.surname, req.query.dob, parseInt(req.params.id)])
       .then(function () {

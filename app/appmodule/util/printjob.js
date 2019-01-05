@@ -12,9 +12,7 @@ printjob.print = function print(prints_d) {
 
         var cmd = "print /d:" + data.prntr + " " + data.file;
         child_process.exec(cmd, function(error, stdout, stderr) {
-            console.log(stdout);
-            console.log(error);
-            console.log(stderr);
+          
             i -= 1;
             if (i > -1) {
                 job(prints_d[i]);

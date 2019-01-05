@@ -33,7 +33,6 @@ feedback.getAllfeedbacks =  function getAllfeedbacks(req, res, next) {
   }
   
   feedback.createfeedback = function createfeedback(req, res, next) {
-    console.log(req.query);
     db.none('insert into feedback(name, surname, dob) values (${name}, ${surname}, ${dob})', req.query)
       .then(function () {
         res.status(200)
@@ -48,7 +47,6 @@ feedback.getAllfeedbacks =  function getAllfeedbacks(req, res, next) {
   }
   
   feedback.updatefeedback = function updatefeedback(req, res, next) {
-    console.log(req.query);
     db.none('update feedback set name=$1, surname=$2, dob=$3 where id=$4',
       [req.query.name, req.query.surname, req.query.dob, parseInt(req.params.id)])
       .then(function () {

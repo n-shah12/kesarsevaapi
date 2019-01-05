@@ -44,14 +44,15 @@ var appRouter = function(app) {
     //##################################### User Type ###########################################################
     app.get(globals.globvar.rootAPI + "/getusertype/:id", usertype.getSingleUserType);
     app.get(globals.globvar.rootAPI + "/getusertypes", usertype.getAllUseTypes);
-    app.post(globals.globvar.rootAPI + "/addusertype", usertype.createUserType);
-    app.put(globals.globvar.rootAPI + "/updateusertype/:id", usertype.updateUserType);
+    app.post(globals.globvar.rootAPI + "/createUserType", usertype.createUserType);
+    //app.put(globals.globvar.rootAPI + "/updateusertype/:id", usertype.updateUserType);
 
     //##################################### User ###########################################################
     app.get(globals.globvar.rootAPI + "/getuser/:id", user.getSingleUser);
     app.get(globals.globvar.rootAPI + "/getusers", user.getAllUsers);
-    app.post(globals.globvar.rootAPI + "/adduser", user.createUser);
-    app.put(globals.globvar.rootAPI + "/updateuser/:id", user.updateUser);
+    app.post(globals.globvar.rootAPI + "/createUser", user.createUser);
+   // app.post(globals.globvar.rootAPI + "/deleteUser", user.deleteUser);
+    //app.put(globals.globvar.rootAPI + "/updateuser/:id", user.updateUser);
 
     //##################################### Order ###########################################################
     app.get(globals.globvar.rootAPI + "/getorder/:id", order.getSingleorder);

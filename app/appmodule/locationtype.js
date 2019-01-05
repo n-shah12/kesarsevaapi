@@ -33,13 +33,18 @@ locationtype.getAllLocationTypes =  function getAllLocationTypes(req, res, next)
   }
   
   locationtype.createlocationtype = function createlocationtype(req, res, next) {
-    console.log(req.body);
-    
-    db.callProcedure("select " + globals.schema("funsave_locationtype") + "($1,$2,$3,$4,$5,$6,$7::json);", [req.body.LocType,req.body.LocTypeDesc,req.body.IsActive,req.body.CreatedOn,req.body.CreatedBy,req.body.UpdatedOn,req.body.UpdatedBy,], function(data) {
-        rs.resp(res, 200, data.rows);
-    }, function(err) {
-        rs.resp(res, 401, "error : " + err);
-    }, 1)
+    var _data = req.body;
+    db.callFunction("select " + globals.schema("funsave_locationtype") + "($1::json);", [_data], function(data) {
+      rs.resp(res, 200, data.rows);
+  }, function(err) {
+      rs.resp(res, 401, "error : " + err);
+  }, 1)
+   
+    // db.callProcedure("select " + globals.schema("funsave_locationtype") + "($1,$2,$3,$4,$5,$6,$7::json);", [req.body.LocType,req.body.LocTypeDesc,req.body.IsActive,req.body.CreatedOn,req.body.CreatedBy,req.body.UpdatedOn,req.body.UpdatedBy,], function(data) {
+    //     rs.resp(res, 200, data.rows);
+    // }, function(err) {
+    //     rs.resp(res, 401, "error : " + err);
+    // }, 1)
     
     // db.query('insert into LocationTypeMaster(LocType, LocTypeDesc, IsActive,CreatedOn,CreatedBy,UpdatedOn,UpdatedBy) values (${locationType}, ${locationTypeDesc}, ${isActive},${createdOn},${createdBy},${updatedOn},${updatedBy})', req.data)
     //   .then(function () {
@@ -56,7 +61,6 @@ locationtype.getAllLocationTypes =  function getAllLocationTypes(req, res, next)
   }
   
   locationtype.updatelocationtype = function updatelocationtype(req, res, next) {
-    console.log(req.query);
     db.none('update LocationTypeMaster set LocType=$1, LocTypeDesc=$2, IsActive=$3 where LocTypeID=$4',
       [req.data.locationType, req.data.locationTypeDesc, req.data.isActive, parseInt(req.data.locTypeID)])
       .then(function () {

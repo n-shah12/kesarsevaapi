@@ -9,16 +9,17 @@ const pool = require('../db/dbservicepool.js');
 
 login.getLogin = function getLogin(req, res, done) {
     var _data = req.body; //getUserData(req);
-
-    db.callProcedure("select " + globals.schema("funget_login") + "($1,$2::json);", ['login', _data], function(data) {
+    console.log(_data);
+    db.callProcedure("select " + globals.schema("funget_login") + "($1,$2::json);", ['users', _data], function(data) {
         rs.resp(res, 200, data.rows);
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
     }, 1)
+ 
 }
 login.getusers = function getusers(req, res, done) {
     var _data = req.body; //getUserData(req);
-
+    
     db.callProcedure("select " + globals.schema("funget_users") + "($1,$2::json);", ['login', _data], function(data) {
         rs.resp(res, 200, data.rows);
     }, function(err) {
