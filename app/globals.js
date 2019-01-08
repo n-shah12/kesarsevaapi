@@ -27,7 +27,7 @@ global.globvar = {
 }
 
 global.schema = function schema(params) {
-    return params;
+    return "kes."+ params;
 };
 
 global.erpschema = function erpschema(params) {

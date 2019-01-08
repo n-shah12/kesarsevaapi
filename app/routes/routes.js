@@ -74,10 +74,12 @@ var appRouter = function(app) {
     // });
 
     //##################################### Location ###########################################################
-    app.get(globals.globvar.rootAPI + "/getlocation/:id", location.getSinglelocation);
+    app.get(globals.globvar.rootAPI + "/getLocationbyid", location.getLocationbyid);
     app.get(globals.globvar.rootAPI + "/getlocations", location.getAlllocations);
     app.post(globals.globvar.rootAPI + "/addlocation", location.createlocation);
     app.put(globals.globvar.rootAPI + "/updatelocation/:id", location.updatelocation);
+    app.get(globals.globvar.rootAPI + "/getsevakendra", location.getsevakendra);
+    
 
     //##################################### Feedback ###########################################################
     app.get(globals.globvar.rootAPI + "/getfeedback/:id", feedback.getSinglefeedback);
