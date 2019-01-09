@@ -7,9 +7,19 @@ const pool = require('../db/dbservicepool.js');
 
 // add query functions
 order.getAllorders =  function getAllorders(req, res, next) {
-    var _data = req.body; //getUserData(req);
+    var _data = req.query; //getUserData(req);
 
     db.callProcedure("select " + globals.schema("funget_orders") + "($1,$2::json);", ['users', _data], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    }, 1)
+  }
+  
+  order.getorderstatus =  function getorderstatus(req, res, next) {
+    var _data = req.body; //getUserData(req);
+
+    db.callProcedure("select " + globals.schema("funget_orderstatus") + "($1,$2::json);", ['users', _data], function(data) {
         rs.resp(res, 200, data.rows);
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
