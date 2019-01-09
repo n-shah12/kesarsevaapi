@@ -33,18 +33,16 @@ order.getAllorders =  function getAllorders(req, res, next) {
   }
   
   order.createorder = function createorder(req, res, next) {
-    db.none('insert into order(name, surname, dob) values (${name}, ${surname}, ${dob})', req.query)
-      .then(function () {
-        res.status(200)
-          .json({
-            status: 'success',
-            message: 'Inserted one order'
-          });
-      })
-      .catch(function (err) {
-        return next(err);
-      });
-  }
+    var _data = req.body;
+    db.callFunction("select " + globals.schema("funsave_order") + "($1::json);", [_data], function(data) {
+      console.log(data.rows);
+      rs.resp(res, 200, data.rows);
+  }, function(err) {
+      rs.resp(res, 401, "error : " + err);
+  }, 1)
+   
+}
+  
   
   order.updateorder = function updateorder(req, res, next) {
     db.none('update order set name=$1, surname=$2, dob=$3 where id=$4',
