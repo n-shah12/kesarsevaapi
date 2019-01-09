@@ -17,20 +17,8 @@ location.getAlllocations =  function getAlllocations(req, res, next) {
   }
   
   location.getLocationbyid = function getSinglelocation(req, res, next) {
-      // var UserID = parseInt(req.params.id);
-      // db.one('select * from location where id = $1', UserID)
-      // .then(function (data) {
-      //   res.status(200)
-      //     .json({
-      //       status: 'success',
-      //       data: data,
-      //       message: 'Retrieved ONE location'
-      //     });
-      // })
-      // .catch(function (err) {
-      //   return next(err);
-      // });
-      var _data = req.body; //getUserData(req);
+      
+      var _data = req.query; //getUserData(req);
 
       db.callProcedure("select " + globals.schema("funget_locationmaster") + "($1,$2::json);", ['location', _data], function(data) {
           rs.resp(res, 200, data.rows);
