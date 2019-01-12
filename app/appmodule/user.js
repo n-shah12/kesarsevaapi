@@ -35,8 +35,7 @@ user.getSingleUser = function getSingleUser(req, res, next) {
 user.createUser = function createUser(req, res, next) {
     var _data = req.body;
     db.callFunction("select " + globals.schema("funsave_user") + "($1::json);", [_data], function(data) {
-      console.log(data.rows);
-      rs.resp(res, 200, data.rows);
+      rs.resp(res, 200, data.rows[0].funsave_user);
   }, function(err) {
       rs.resp(res, 401, "error : " + err);
   }, 1)

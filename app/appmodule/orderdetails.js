@@ -6,6 +6,16 @@ var order = module.exports = {};
 const pool = require('../db/dbservicepool.js');
 
 // add query functions
+
+order.getorders = function (req, res, next) {
+  var _data = req.query; //getUserData(req);
+  db.callProcedure("select " + globals.schema("funget_orders") + "($1,$2::json);", ['orders', _data], function(data) {
+      rs.resp(res, 200, data.rows);
+  }, function(err) {
+      rs.resp(res, 401, "error : " + err);
+  }, 1)
+
+}
 order.getAllorders =  function getAllorders(req, res, next) {
     var _data = req.query; //getUserData(req);
 

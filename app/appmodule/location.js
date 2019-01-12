@@ -7,13 +7,14 @@ const pool = require('../db/dbservicepool.js');
 
 // add query functions
 location.getAlllocations =  function getAlllocations(req, res, next) {
-    var _data = req.body; //getUserData(req);
+  var _data = req.body; //getUserData(req);
 
-    db.callProcedure("select " + globals.schema("funget_locationmaster") + "($1,$2::json);", ['users', _data], function(data) {
-        rs.resp(res, 200, data.rows);
-    }, function(err) {
-        rs.resp(res, 401, "error : " + err);
-    }, 1)
+  db.callProcedure("select " + globals.schema("funget_locationmaster") + "($1,$2::json);", ['users', _data], function(data) {
+    console.log(data.rows);
+    rs.resp(res, 200, data.rows);
+  }, function(err) {
+      rs.resp(res, 401, "error : " + err);
+  }, 1)
   }
   
   location.getLocationbyid = function getSinglelocation(req, res, next) {

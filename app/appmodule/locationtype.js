@@ -35,29 +35,12 @@ locationtype.getAllLocationTypes =  function getAllLocationTypes(req, res, next)
   locationtype.createlocationtype = function createlocationtype(req, res, next) {
     var _data = req.body;
     db.callFunction("select " + globals.schema("funsave_locationtype") + "($1::json);", [_data], function(data) {
-      rs.resp(res, 200, data.rows);
+      rs.resp(res, 200, data.rows[0].funsave_locationtype);
+      //rs.resp(res, 200, data.rows);
   }, function(err) {
       rs.resp(res, 401, "error : " + err);
   }, 1)
    
-    // db.callProcedure("select " + globals.schema("funsave_locationtype") + "($1,$2,$3,$4,$5,$6,$7::json);", [req.body.LocType,req.body.LocTypeDesc,req.body.IsActive,req.body.CreatedOn,req.body.CreatedBy,req.body.UpdatedOn,req.body.UpdatedBy,], function(data) {
-    //     rs.resp(res, 200, data.rows);
-    // }, function(err) {
-    //     rs.resp(res, 401, "error : " + err);
-    // }, 1)
-    
-    // db.query('insert into LocationTypeMaster(LocType, LocTypeDesc, IsActive,CreatedOn,CreatedBy,UpdatedOn,UpdatedBy) values (${locationType}, ${locationTypeDesc}, ${isActive},${createdOn},${createdBy},${updatedOn},${updatedBy})', req.data)
-    //   .then(function () {
-    //     res.status(200)
-    //       .json({
-    //         status: 'success',
-    //         message: 'Inserted one LocationType'
-    //       });
-    //   })
-    //   .catch(function (err) {
-    //     return next(err);
-    //   });
-
   }
   
   locationtype.updatelocationtype = function updatelocationtype(req, res, next) {
@@ -91,11 +74,3 @@ locationtype.getAllLocationTypes =  function getAllLocationTypes(req, res, next)
         return next(err);
       });
   }
-  
-//   module.exports = {
-//     getAllUsers: getAllUsers,
-//     getSingleUser: getSingleUser,
-//     createUser: createUser,
-//     updateUser: updateUser,
-//     deleteUser: deleteUser
-//   };
