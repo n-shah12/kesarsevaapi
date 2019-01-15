@@ -14,7 +14,17 @@ user.getAllUsers =  function getAllUsers(req, res, next) {
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
     }, 1)
-  }
+}
+user.getUsersdetail =  function getUsersdetail(req, res, next) {
+  var _data = req.query; //getUserData(req);
+  console.log(_data);
+  db.callProcedure("select " + globals.schema("funget_usersdetail") + "($1,$2::json);", ['users', _data], function(data) {
+    //rs.resp(data.rows); 
+    rs.resp(res, 200, data.rows);
+  }, function(err) {
+      rs.resp(res, 401, "error : " + err);
+  }, 1)
+}
   
 user.getSingleUser = function getSingleUser(req, res, next) {
       var UserID = parseInt(req.params.id);

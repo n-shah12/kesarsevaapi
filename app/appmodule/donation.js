@@ -6,6 +6,15 @@ var donation = module.exports = {};
 const pool = require('../db/dbservicepool.js');
 
 // add query functions
+donation.donate=function donate(req, res, next){
+  var _data = req.body; //getUserData(req);
+
+  db.callFunction("select " + globals.schema("funsave_donation") + "($1::json);", [_data], function(data) {
+      rs.resp(res, 200, data.rows);
+  }, function(err) {
+      rs.resp(res, 401, "error : " + err);
+  }, 1)
+}
 donation.getAlldonations =  function getAlldonations(req, res, next) {
     var _data = req.body; //getUserData(req);
 

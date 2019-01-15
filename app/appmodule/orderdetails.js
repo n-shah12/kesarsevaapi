@@ -9,6 +9,7 @@ const pool = require('../db/dbservicepool.js');
 
 order.getorders = function (req, res, next) {
   var _data = req.query; //getUserData(req);
+  
   db.callProcedure("select " + globals.schema("funget_orders") + "($1,$2::json);", ['orders', _data], function(data) {
       rs.resp(res, 200, data.rows);
   }, function(err) {

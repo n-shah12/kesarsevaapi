@@ -50,6 +50,7 @@ var appRouter = function(app) {
     //##################################### User ###########################################################
     app.get(globals.globvar.rootAPI + "/getuser/:id", user.getSingleUser);
     app.get(globals.globvar.rootAPI + "/getusers", user.getAllUsers);
+    app.get(globals.globvar.rootAPI + "/getuserdetail", user.getUsersdetail);
     app.post(globals.globvar.rootAPI + "/createUser", user.createUser);
    // app.post(globals.globvar.rootAPI + "/deleteUser", user.deleteUser);
     //app.put(globals.globvar.rootAPI + "/updateuser/:id", user.updateUser);
@@ -94,6 +95,8 @@ var appRouter = function(app) {
     app.get(globals.globvar.rootAPI + "/getdonations", donation.getAlldonations);
     app.post(globals.globvar.rootAPI + "/adddonation", donation.createdonation);
     app.put(globals.globvar.rootAPI + "/updatedonation/:id",donation.updatedonation);
+    app.post(globals.globvar.rootAPI + "/donate", donation.donate);
+    
 
     //##################################### File Upload #####################################################
 
