@@ -61,6 +61,7 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/addorder", order.createorder);
     app.put(globals.globvar.rootAPI + "/updateorder/:id", order.updateorder);
     app.get(globals.globvar.rootAPI + "/getorderstatus", order.getorderstatus);
+    app.get(globals.globvar.rootAPI + "/getpaymode", order.getpaymode);
     
 
     //##################################### Location Type ###########################################################
