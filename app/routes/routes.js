@@ -40,6 +40,8 @@ var appRouter = function(app) {
 
     app.post(globals.globvar.rootAPI + "/getLogin", login.getLogin);
     app.post(globals.globvar.rootAPI + "/getLogout", login.getLogout);
+    app.post(globals.globvar.rootAPI + "/loginlog", login.loginlog);
+    app.get(globals.globvar.rootAPI + "/forgetpassword", login.forgetpassword);
 
     //##################################### User Type ###########################################################
     app.get(globals.globvar.rootAPI + "/getusertype/:id", usertype.getSingleUserType);

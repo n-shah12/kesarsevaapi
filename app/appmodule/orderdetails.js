@@ -29,7 +29,7 @@ order.getpaymode = function getpaymode(req, res, next) {
 }
 order.getAllorders =  function getAllorders(req, res, next) {
     var _data = req.query; //getUserData(req);
-
+    console.log(_data);
     db.callProcedure("select " + globals.schema("funget_orders") + "($1,$2::json);", ['users', _data], function(data) {
         rs.resp(res, 200, data.rows);
     }, function(err) {
